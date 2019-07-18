@@ -9,6 +9,30 @@ a) Define an enumeration called `iOSDeviceType` with member values `iPhone`, `iP
 
 b) Adjust your code above so that `iPhone` and `iPad` have associated values of type String which represents the model number, eg: `iPhone("6 Plus")`. Use a switch case and let syntax to print out the model number of each device.
 
+```
+// A.
+enum iOSDeviceType {
+case iphone
+case ipad
+case iwatch
+}
+
+var myDevice = iOSDeviceType.ipad
+
+//B.
+enum iOSDeviceType {
+case iphone (String)
+case ipad (String)
+case iwatch (String)
+}
+
+var myDevice = iOSDeviceType.ipad
+
+iOSDeviceType.iphone("6 plus")
+iOSDeviceType.ipad("version 2")
+
+print(iOSDeviceType.iphone("6 plus"))
+```
 
 ## Question 2
 
@@ -17,6 +41,21 @@ a) Write an enum called `Shape` and give it cases for `triangle`, `rectangle`, `
 b) Write a method inside `Shape` that returns how many sides the shape has. Create a variable called `myFavoritePolygon` and assign it to one of the shapes above, then print out how many sides it has.
 
 c) Re-write `Shape` so that each case has an associated value of type Int that will represent the length of the sides (assume the shapes are regular polygons so all the sides are the same length) and write a method inside that returns the perimeter of the shape.
+```
+//A. & B.
+enum Shape {
+case triangle (String)
+case rectangle (String)
+case square (String)
+case pentagon (String)
+case hexagon (String)
+}
+
+var myFavoritePolygon = Shape.pentagon("5 sides")
+
+print(myFavoritePolygon)
+
+```
 
 
 ## Question 3
@@ -45,7 +84,33 @@ enum Direction {
 var location = (x: 0, y: 0)
 var steps: [Direction] = [.up, .up, .left, .down, .left]
 
-// your code here
+```
+```
+enum Direction {
+case up
+case down
+case left
+case right
+}
+
+var location = (x: 0, y: 0)
+var steps: [Direction] = [.up, .up, .left, .down, .left]
+
+for directions in steps{
+print("the current location is at x: \(location.x) and y: \(location.y)")
+print("I am about to go \(directions)")
+switch directions{
+case .up:
+location.y += 1
+case .down:
+location.y -= 1
+case .left:
+location.x -= 1
+case .right:
+location.x += 1
+}
+}
+
 ```
 
 
@@ -58,6 +123,43 @@ b) Define an enumeration named `MatchResult` with three members: `.win`, `.draw`
 c) Write a function called `match` that takes two `HandShapes` and returns a `MatchResult`. It should return the outcome for the first player (the one with the first hand shape).
 
 Hint: Rock beats scissors, paper beats rock, scissor beats paper
+
+```
+enum HandShape{
+case rock
+case paper
+case scissors
+}
+enum MatchResult{
+case win
+case draw
+case lose
+}
+
+func match(firstShape: HandShape, SecondShape: HandShape) -> MatchResult {
+switch firstShape {
+case .rock:
+switch SecondShape{
+case .rock: return .draw
+case .paper: return .lose
+case .scissors: return .win
+}
+case .paper:
+switch SecondShape{
+case .rock: return .win
+case .paper: return .draw
+case .scissors: return .lose
+}
+case .scissors:
+switch SecondShape{
+case .rock: return .lose
+case .paper: return .win
+case .scissors: return .draw
+}
+}
+}
+
+```
 
 
 ## Question 6
